@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Spesial untuk Felisa</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            background: url('https://source.unsplash.com/1600x900/?nature,romantic') no-repeat center center fixed;
+            background-size: cover;
+            filter: brightness(0.9); /* membuat background sedikit gelap untuk kontras */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8); /* transparan putih */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1; /* pastikan overlay di atas gambar */
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* memberikan efek bayangan */
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* bayangan teks */
+        }
+        h1:hover {
+            transform: scale(1.1);
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #333; /* warna teks */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* efek transformasi */
+        }
+        button:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff69b4;
+            transform: rotate(-45deg);
+            animation: float 5s ease-in-out infinite;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff69b4;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+        .message {
+            display: none;
+            background-color: #fff;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2; /* pastikan pesan di atas overlay */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Selamat Datang, Felisa!</h1>
+        <p>Ini adalah halaman khusus untukmu yang diprogram oleh seorang pengagum rahasia. 
+            <br>Semoga kamu menyukainya!</p>
+        <button onclick="showMessage()">Klik untuk pesan khusus!</button>
+    </div>
+    
+    <div class="message" id="loveMessage">
+        <p>Di dunia yang penuh kesibukan ini, menemukan seseorang seperti dirimu adalah anugerah. Senyummu memiliki kekuatan untuk menerangi hari-hariku dan kehadiranmu adalah kebahagiaan yang tidak ternilai." - Seorang Pengagum</p>
+        <button onclick="closeMessage()">Tutup</button>
+    </div>
+
+    <script>
+        function showMessage() {
+            createHearts();
+            document.getElementById('loveMessage').style.display = 'block';
+        }
+
+        function closeMessage() {
+            document.getElementById('loveMessage').style.display = 'none';
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
